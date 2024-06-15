@@ -1,5 +1,4 @@
 const path = require('path');
-const sharp = require('sharp');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const { createCanvas, loadImage, Image } = require('canvas');
 
@@ -11,18 +10,11 @@ async function createWantedImage(imageURL) {
             throw new Error('Failed to fetch image. Please ensure the URL is correct and the image is accessible.');
         }
 
-        // Buffer the image and process with sharp
+        // Buffer the image
         const imageBuffer = await response.buffer();
-        let image = sharp(imageBuffer);
 
-        const metadata = await image.metadata();
-        const maxDimension = 1000; // Example maximum dimension
-
-        if (metadata.width > maxDimension || metadata.height > maxDimension) {
-            image = image.resize(maxDimension, maxDimension, { fit: 'inside' });
-        }
-
-        const resizedBuffer = await image.toBuffer();
+        // Load the image using canvas
+        const img = await loadImage(imageBuffer);
 
         // Create canvas and draw the images
         const canvas = createCanvas(736, 959);
@@ -32,10 +24,19 @@ async function createWantedImage(imageURL) {
         const background = await loadImage(path.join(__dirname, '..', 'img', 'wanted.jpg'));
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-        // Load the (possibly resized) user-provided image
-        const avatar = new Image();
-        avatar.src = resizedBuffer;
-        ctx.drawImage(avatar, 86, 215, 575, 392);
+        // Resize the user-provided image if necessary
+        const maxDimension = 1000;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxDimension || height > maxDimension) {
+            const scale = Math.min(maxDimension / width, maxDimension / height);
+            width *= scale;
+            height *= scale;
+        }
+
+        // Draw the resized user-provided image onto the canvas
+        ctx.drawImage(img, 86, 215, width, height);
 
         // Return the canvas buffer
         return canvas.toBuffer();
