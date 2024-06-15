@@ -1,0 +1,160 @@
+                                    <!DOCTYPE html>
+                                    <html lang="en">
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+                                        <link rel="stylesheet" href="/css/styles.css">
+                                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark/dark.css">
+
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <style>
+                                            .input_utility {
+                                              position: relative;
+                                              padding: 10px;
+                                              color: gray;
+                                              background-color: var(--dark-color-light);
+                                              backdrop-filter: blur(16px);
+                                              border: 1px solid #555;
+                                              border-radius: 10px;
+                                            }
+                                            .output {
+                                                position: relative;
+                                                background: var(--gradient-card);
+                                                padding: 1.25rem;
+                                                border: 2px solid var(--first-color-light);
+                                                border-radius: 1rem;
+                                            }
+                                            .dbtn {
+                                                  display: flex;
+                                                  justify-content: center;
+                                                  align-items: center;
+                                                padding-top: 10px;
+                                            }
+                                              .boton-elegante {
+                                                padding: 15px 30px;
+                                                border: 2px solid #2c2c2c;
+                                                background-color: #1a1a1a;
+                                                color: #ffffff;
+                                                font-size: 0.75rem;
+                                                cursor: pointer;
+                                                border-radius: 30px;
+                                                transition: all 0.4s ease;
+                                                outline: none;
+                                                position: relative;
+                                                overflow: hidden;
+                                                font-weight: bold;
+                                              }
+
+                                              .boton-elegante::after {
+                                                content: "";
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 100%;
+                                                background: radial-gradient(
+                                                  circle,
+                                                  rgba(255, 255, 255, 0.25) 0%,
+                                                  rgba(255, 255, 255, 0) 70%
+                                                );
+                                                transform: scale(0);
+                                                transition: transform 0.5s ease;
+                                              }
+
+                                              .boton-elegante:hover::after {
+                                                transform: scale(4);
+                                              }
+
+                                              .boton-elegante:hover {
+                                                border-color: #666666;
+                                                background: #292929;
+                                              }
+                                        </style>
+                                        <%- include('parts/links') %>
+                                        <title>Petpet</title>
+                                    </head>
+                                    <body>
+
+                                        <%- include('parts/snow') %>
+                                        <%- include('parts/nav', { user: user }) %>
+                                        <main class="main" id="main">
+                                            <div class="section__util">
+
+
+                                                <h2 class="section__title">
+                                                    PETPET <br> <span>GENERATOR</span>
+                                                </h2>
+
+                                                <div class="contact__container container grid">
+                                                    <form id="petpetForm" action="/utility/petpet" method="GET">
+                                                        <div class="contact__content">
+                                                            <div  class="bpad">
+                                                                <h3 class="contact__title">Avatar Image URL</h3>
+                                                                <div class="contact__social">
+                                                                    <input placeholder="Type your image URL" class="input_utility" type="text" id="image" name="image" required>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h3 class="contact__title">Resolution (px)</h3>
+                                                                <div class="contact__social">
+                                                                    <input class="input_utility" type="number" id="resolution" name="resolution" min="64" max="1080" value="128" required>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h3 class="contact__title">Delay (ms)</h3>
+                                                                <div class="contact__social">
+                                                                    <input class="input_utility" type="number" id="delay" name="delay" min="10" max="100" value="20" required>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h3 class="contact__title">Background Color</h3>
+                                                                <div class="contact__social">
+                                                                    <input class="input_utility" type="color" id="backgroundColor" name="backgroundColor" value="#f44336" required>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <button type="submit" class="boton-elegante">GENERATE</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <% if (gifData) { %>
+                                                        <div class="output">
+                                                            <div>
+                                                            <img id="generatedGif" src="data:image/gif;base64,<%= gifData %>" class="contact__img" alt="Generated Petpet GIF">
+                                                            </div>
+                                                            <div class="dbtn">
+                                                            <a id="downloadButton" href="data:image/gif;base64,<%= gifData %>" download="petpet.gif"><button class="boton-elegante">Download Gif</button></a></div>
+                                                        </div>
+                                                    <% } else { %>
+                                                        <img src="data:image/gif;base64" alt="Generated Petpet GIF" class="contact__img" onerror="this.onerror=null;this.src='/img/error.png';">
+                                                    <% } %>
+                                                </div>
+                                            </div>
+
+                                            <%- include('parts/footer') %>
+                                        </main>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script src="/js/main.js"></script>
+                                                <script>
+                                                    document.addEventListener("DOMContentLoaded", function () {
+                                                        <% if (errorMessage) { %>
+                                                            Swal.fire({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                icon: 'error',
+                                                                title: '<%= errorMessage %>',
+                                                                showConfirmButton: false,
+                                                                timer: 5000,
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                }
+                                                            });
+                                                        <% } %>
+                                                    });
+                                                </script>
+                                    </body>
+                                    </html>

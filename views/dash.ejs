@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+      <%- include('parts/links') %>
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="/css/styles.css">
+    
+      <title>Dashboard</title>
+   </head>
+   <body>
+      <!-- Sidebar bg -->
+
+     <%- include('parts/snow') %>
+
+      <!--=============== Nav ===============-->
+      <%- include('parts/nav') %>
+
+      <!--=============== MAIN ===============-->
+      <main class="main" id="main">
+        <div class="sectiond">
+          <!-- sstart -->
+        <h2 class="dhtitle tdfont">Hi <span class="tsdfont"><%= user.displayName %></span></h2>
+        <!-- <img src="<%= user.photo %>" alt="Profile Picture"> -->
+        <p class="dpara">Welcome to your Dashboard!</p>
+
+          <section class="home">
+
+            <div class="card profile-card">
+
+
+              <div class="profile-card-wrapper">
+
+                <figure class="card-avatar">
+                  <img src="<%= user.photo %>" alt="<%= user.displayName %>" width="48" height="48">
+                </figure>
+
+                <div>
+                  <p class="card-title"><%= user.displayName %></p>
+
+                  <p class="card-subtitle"></p>
+                </div>
+
+              </div>
+
+              <ul class="contact-list">
+                <li>
+                  <a href="mailto:<%= user.email %>" class="contact-link icon-box">
+                    <span class="material-symbols-rounded icon">mail</span>
+                    <p class="text"><%= user.email %></p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="contact-link icon-box" onclick="copyApiKey(event)">
+                    <span class="material-symbols-rounded icon">key</span>
+                    <p class="text"><%= user.apiKey %></p>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="divider card-divider"></div>
+
+              <ul class="progress-list">
+                <li class="progress-item">
+                  <div class="progress-label">
+                    <p class="progress-title">Tokens Usage</p>
+                    <data class="progress-data" value="<%= user.tokens %>"><%= Math.min(Math.round(user.tokens / 250 * 100 * 100) / 100, 100).toFixed(2) %>%</data>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="--width: <%= Math.min(Math.round(user.tokens / 250 * 100 * 100) / 100, 100).toFixed(2) %>%; --bg: var(--hovered-color);"></div>
+                  </div>
+                </li>
+
+                <!-- <li class="progress-item">
+                  <div class="progress-label">
+                    <p class="progress-title">Overall Rating</p>
+                    <data class="progress-data" value="7.5">7.5</data>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="--width: 75%; --bg: var(--hovered-color);"></div>
+                  </div>
+                </li> -->
+              </ul>
+
+
+            </div>
+
+            <div class="card-wrapper">
+
+              <div class="card task-card">
+
+                <div class="card-icon icon-box green">
+                  <span class="material-symbols-rounded  icon">toll</span>
+                </div>
+
+                <div>
+                  <data class="card-data" value="21"><%= user.tokens %></data>
+
+                  <p class="card-text">Tokens</p>
+                </div>
+
+              </div>
+
+              <div class="card task-card">
+
+                <div class="card-icon icon-box blue">
+                  <span class="material-symbols-rounded  icon">monetization_on</span>
+                </div>
+
+                <div>
+                  <data class="card-data" value="21"><% const unlimitedText = user.unlimited ? 'Yes' : 'No'; %>
+                    <%= unlimitedText %>
+</data>
+
+                  <p class="card-text">Unlimited </p>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </section>
+          <div class="ddiv">
+            <div class="card">
+              <div class="order">
+                <div class="head">
+                  <h3>Recent Orders</h3>
+                  <i class='bx bx-search' ></i>
+                  <i class='bx bx-filter' ></i>
+                </div>
+                <div class="order-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>User</th>
+                        <th>Date Order</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status pending">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status process">Process</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status pending">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="img/people.png">
+                          <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+
+         
+<!-- sstop -->
+          </div>
+        <!-- 
+          - #FOOTER in main
+        -->
+        <%- include('parts/footer') %>
+      </main>
+      
+      <!--=============== MAIN JS ===============-->
+          <script src="/js/main.js"></script>
+   </body>
+</html>

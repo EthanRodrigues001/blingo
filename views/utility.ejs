@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="/css/styles.css">
+
+      <%- include('parts/links') %>
+      <title>Developers</title>
+   </head>
+   <body>
+
+      <!--=============== Snow Effect ===============-->
+      <%- include('parts/snow') %>
+
+
+      <!--=============== Nav ===============-->
+     <%- include('parts/nav', { user: user }) %>
+
+
+      <!--=============== MAIN ===============-->
+      <main class="main" id="main">
+
+        <!--=============== body start ===============-->
+
+         <div class="shop" id="shop">
+            <h2 class="section__title">
+               Our Assets (Utility)
+            </h2>
+
+            <div class="shop__container container grid">
+               <article class="shop__card" data-sr-id="14" style="visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s;">
+   
+
+                  <h3 class="shop__title">Petpet<br></h3>
+
+                  <a href="/utility/petpet" class="shop__button"><i class="ri-share-circle-line"></i></a>
+
+
+               </article>
+
+               <article class="shop__card" data-sr-id="15" style="visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s;">
+      
+
+                  <h3 class="shop__title">Wanted<br></h3>
+
+                  <a href="/utility/wanted" class="shop__button"><i class="ri-share-circle-line"></i></a>
+               </article>
+
+               <article class="shop__card" data-sr-id="16" style="visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s;">
+                
+
+                  <h3 class="shop__title">Country</h3>
+                  <a href="/utility/country" class="shop__button"><i class="ri-share-circle-line"></i></a>
+               </article>
+
+               <article class="shop__card" data-sr-id="17" style="visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s;">
+                
+
+                  <h3 class="shop__title">Soon</h3>
+                  <a href="#" class="shop__button"><i class="ri-share-circle-line"></i></a>
+               </article>
+
+               <article class="shop__card" data-sr-id="18" style="visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transition: opacity 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s, transform 2.5s cubic-bezier(0.5, 0, 0, 1) 0.3s;">
+                  
+
+                  <h3 class="shop__title">Soon</h3>
+                  <a href="#" class="shop__button"><i class="ri-share-circle-line"></i></a>
+               </article>
+            </div>
+         </div>
+
+
+        <!--=============== body end ===============-->
+              <!-- 
+                - #FOOTER
+              -->
+         <%- include('parts/footer') %>
+
+      </main>
+      <!--=============== MAIN JS ===============-->
+      <script src="/js/main.js"></script>
+   </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+          .country-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+            filter: drop-shadow(var(--shadow-img));
+            justify-self: center;
+            background: var(--gradient-card);
+            padding: 1.25rem;
+            border: 2px solid var(--first-color-light);
+            border-radius: 1rem;
+
+          }
+
+          .country-flag {
+            margin-bottom: 20px;
+          }
+
+          .country-details {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+          }
+
+          .country-column {
+            width: 45%;
+          }
+        @media (min-width: 425px) {
+            .country-info {
+                width: 95%;
+          }
+        }
+        .bpad{
+          padding-bottom: 10px;
+        }
+        .input_utility {
+          position: relative;
+          padding: 10px;
+          color: gray;
+          background-color: var(--dark-color-light);
+          backdrop-filter: blur(16px);
+          border: 1px solid #555;
+          border-radius: 10px;
+        }
+    </style>
+    <%- include('parts/links') %>
+    <title>Developers</title>
+</head>
+
+<body>
+    <%- include('parts/snow') %>
+    <%- include('parts/nav', { user: user }) %>
+    <main class="main" id="main">
+        <div class="section__util">
+            <h2 class="section__title">Country<br> <span>Search</span></h2>
+            <div class="contact__container container grid">
+                <form id="wantedForm" action="/utility/country" method="GET">
+                    <div class="contact__content">
+                        <div>
+                            <h3 class="contact__title">Country Name:</h3>
+                            <div class="contact__social">
+                                <input placeholder="Type your image URL" class="input_utility" type="text" id="country" name="country" required>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit">SEARCH</button>
+                        </div>
+                    </div>
+                </form>
+                <% if (countryData) { %>
+                    <div class="bpad">
+                    <div class="country-info">
+                        <h2><%= countryData.country %></h2>
+                        <div class="country-flag">
+                            <img src="<%= countryData.flag %>" alt="Flag of <%= countryData.country %>" style="width:100px;">
+                        </div>
+                        <div class="country-details">
+                            <div class="country-column">
+                                <div  class="bpad">
+                                    <h3 class="contact__title">Country</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.country %>
+                                    </div>
+                                </div>
+                                <div  class="bpad">
+                                    <h3 class="contact__title">Capital</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.capital %>
+                                    </div>
+                                </div>
+                                <div  class="bpad">
+                                    <h3 class="contact__title">Currency</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.currency %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Native Language(s)</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.native_language.join(', ') %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Famous For</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.famous_for %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Phone Code</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.phone_code %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Drive Direction</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.drive_direction %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Alcohol Prohibition</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.alcohol_prohibition %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="country-column">
+                                <div class="bpad">
+                                    <h3 class="contact__title">Area</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.area.km2 %> km² (<%= countryData.area.mi2 %> mi²)
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Continent</h3>
+                                    <div class="contact__social">
+                                        <%= continents[countryData.continent] %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">ISO Codes</h3>
+                                    <div class="contact__social">
+                                        Numeric - <%= countryData.iso.numeric %>, Alpha-2 - <%= countryData.iso.alpha_2 %>, Alpha-3 - <%= countryData.iso.alpha_3 %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Top-Level Domain</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.tld %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Constitutional Form</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.constitutional_form %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Language Codes</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.language_codes.join(', ') %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Is Landlocked</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.is_landlocked ? 'Yes' : 'No' %>
+                                    </div>
+                                </div>
+                                <div class="bpad">
+                                    <h3 class="contact__title">Neighbors</h3>
+                                    <div class="contact__social">
+                                        <%= countryData.neighbors.join(', ') %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                            </div>
+
+
+                            <% } else { %>
+                            <img src="data:image/jpeg;base64" alt="Generated Wanted Poster" class="contact__img" onerror="this.onerror=null;this.src='/img/error.png';">
+                            <% } %>
+
+            </div>
+        </div>
+        <%- include('parts/footer') %>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            <% if (errorMessage) { %>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '<%= errorMessage %>',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            <% } %>
+        });
+    </script>
+</body>
+
+</html>

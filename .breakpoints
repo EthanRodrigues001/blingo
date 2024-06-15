@@ -1,0 +1,34 @@
+{
+  "files": {
+    "index.js": [
+      {
+        "id": "f6f0f3d7-d504-416b-b43d-39aa016af777",
+        "line": 153,
+        "version": 976,
+        "index": 3837
+      }
+    ],
+    "views/developers.ejs": [
+      {
+        "id": "992b314f-580f-4fba-b128-67a485c5bcb6",
+        "line": 29,
+        "version": 124,
+        "index": 813
+      },
+      {
+        "id": "f886ba6a-4741-4526-85bf-36a78dba5d4b",
+        "line": 38,
+        "version": 124,
+        "index": 1028
+      }
+    ],
+    "views/index.ejs": [
+      {
+        "id": "bc01090c-1c8c-4ec3-8d28-6dfda7ec02ea",
+        "line": 1,
+        "version": 1026,
+        "index": 0
+      }
+    ]
+  }
+}

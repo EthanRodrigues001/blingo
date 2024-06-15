@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="/css/styles.css">
+
+      <%- include('parts/links') %>
+      <title>Developers</title>
+   </head>
+   <body>
+
+      <!--=============== Snow Effect ===============-->
+      <%- include('parts/snow') %>
+
+
+      <!--=============== Nav ===============-->
+     <%- include('parts/nav', { user: user }) %>
+
+
+      <!--=============== MAIN ===============-->
+      <main class="main" id="main">
+
+        <!--=============== body start ===============-->
+
+        <h1>Main Page with no border/padding</h1>
+        <div class="section">
+          <h1>Section with centered elements</h1>
+
+        </div>
+
+
+        <!--=============== body end ===============-->
+              <!-- 
+                - #FOOTER
+              -->
+         <%- include('parts/footer') %>
+
+      </main>
+      <!--=============== MAIN JS ===============-->
+      <script src="/js/main.js"></script>
+   </body>
+</html>

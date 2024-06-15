@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.8.3/dist/anime.min.js"></script>
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+    <%- include('parts/links') %>
+    <title>Home</title>
+</head>
+<body>
+
+    <div id="snowEffectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="mtitle">Settings</h2>
+            <p class="mdescription">Here you can change the settings of the website. Changes will be saved automatically.</p>
+            <div class="sbtwn">
+                <p class="stitle">Effects: </p>
+                <label class="switch">
+                    <input type="checkbox" id="snowToggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+     
+    <div id="snow"></div>
+
+    <!--=============== Nav ===============-->
+    <%- include('parts/nav', { user: user }) %>
+
+    <!--=============== MAIN ===============-->
+    <main class="main" id="main">
+        <div class="section">
+            <div class="home__container container grid">
+                <img src="/img/home_poster.png" alt="image" class="home__img" data-sr-id="0">
+
+                <div class="home__data" data-sr-id="6">
+                    <h1 class="home__title">
+                      Transform Visuals <br> with <span>Blingo's</span> Magic Overlay 
+<br>
+                    </h1>
+                    <p class="home__description">
+                        With Blingo, effortlessly overlay images and text to create captivating designs.Add a touch of magic to your content today!
+                    </p>
+                    <div class="home__buttons">
+                        <a href="/utility" class="button">
+                            <span>
+                                <i class="ri-arrow-right-line"></i>
+                            </span>
+                            OUR ASSETS
+                        </a>
+                        <a href="/about" class="button__link">MORE DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section"></div>
+
+        <!--=============== FOOTER ===============-->
+        <%- include('parts/footer') %>
+    </main>
+
+    <!--=============== SCROLL REVEAL ===============-->
+      
+      <script src="/js/scrollreveal.min.js"></script>
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              if (typeof ScrollReveal !== 'undefined') {
+                  console.log('ScrollReveal is loaded');
+
+                  const sr = ScrollReveal({
+                      origin: 'top',
+                      distance: '80px',
+                      duration: 2500,
+                      // delay: 300,
+                  });
+
+                  console.log('Setting up ScrollReveal');
+
+                  const elements = document.querySelectorAll('.home__img, .home__data');
+                  console.log('Elements found:', elements.length);
+                  elements.forEach(element => {
+                      console.log('Element:', element);
+                  });
+
+                  sr.reveal('.home__img, .home__data', {
+                      beforeReveal: function (el) {
+                          console.log('Before Reveal:', el);
+                      },
+                      afterReveal: function (el) {
+                          console.log('After Reveal:', el);
+                          el.style.opacity = 1; // Manually set opacity to 1 for visibility
+                      }
+                  });
+              } else {
+                  console.error('ScrollReveal is not loaded');
+              }
+          });
+      </script>
+    <!--=============== MAIN JS ===============-->
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!--=============== HEADER ===============-->
+<header class="header">
+   <div class="header__container container">
+      <div class="header__toggle" id="header-toggle">
+         <i class="ri-menu-line"></i>
+      </div>
+
+        <% if (user) { %>
+          <!-- Show modal button if user is logged in -->
+          <button id="openModalBtn" title="theme" class="theme header__logo">
+            <svg viewBox="0 0 512 512" height="1em">
+              <path
+                d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"
+              ></path>
+            </svg>
+          </button>
+        <% } else { %>
+           <button class="theme header__logo">
+               <a href="/auth/google">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+               </a>
+           </button>
+          
+
+        <% } %>
+
+      <!-- <a href="#" class="header__logo">
+         <img src="/img/yt-logo-full.svg" alt="">
+      </a> -->
+   </div>
+</header>
+
+<!--=============== SIDEBAR ===============-->
+<div class="sidebar" id="sidebar">
+   <nav class="sidebar__container">
+      <div class="sidebar__logo">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5" fill="none" shape-rendering="crispEdges" width="512" height="512"><metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"><rdf:RDF><rdf:Description><dc:title>Identicon</dc:title><dc:creator>DiceBear</dc:creator><dc:source xsi:type="dcterms:URI">https://www.dicebear.com</dc:source><dcterms:license xsi:type="dcterms:URI">https://creativecommons.org/publicdomain/zero/1.0/</dcterms:license><dc:rights>„Identicon” (https://www.dicebear.com) by „DiceBear”, licensed under „CC0 1.0” (https://creativecommons.org/publicdomain/zero/1.0/)</dc:rights></rdf:Description></rdf:RDF></metadata><mask id="viewboxMask"><rect width="5" height="5" rx="0" ry="0" x="0" y="0" fill="#fff" /></mask><g mask="url(#viewboxMask)"><g transform="rotate(360, 2.5, 2.5)"><g transform="scale(-1 1) translate(-5 0)"><path fill="#F74F4D" d="M1 0h3v1H1z"/><path d="M2 1H0v1h2V1ZM5 1H3v1h2V1Z" fill="#F74F4D"/><path d="M0 2h1v1H0V2ZM4 2h1v1H4V2ZM3 2H2v1h1V2Z" fill="#F74F4D"/><path fill="#F74F4D" d="M2 3h1v1H2z"/><path d="M1 4H0v1h1V4ZM5 4H4v1h1V4Z" fill="#F74F4D"/></g></g></g></svg>
+         <!-- <img src="/img/blingo.png" alt="" class="sidebar__logo-img"> -->
+         <div class="sidebar__logo-text">BLINGO</div>
+      </div>
+
+      <div class="sidebar__content">
+         <div class="sidebar__list">
+            <a href="/" class="sidebar__link">
+               <i class="ri-home-5-line"></i>
+               <span class="sidebar__link-name">Home</span>
+               <span class="sidebar__link-floating">Home</span>
+            </a>
+
+            <% if (user) { %>
+            <a href="/dashboard" class="sidebar__link">
+               <i class="ri-user-settings-line"></i>
+               <span class="sidebar__link-name">Dashboard </span>
+               <span class="sidebar__link-floating">Dashboard </span>
+            </a>
+               <% } %>
+
+                  <a href="/utility" class="sidebar__link">
+                     <i class="ri-shining-line"></i>
+                     <span class="sidebar__link-name">Utility</span>
+                     <span class="sidebar__link-floating">Utility</span>
+                  </a>
+                  
+            <a href="/about" class="sidebar__link">
+               <i class="ri-information-line"></i>
+               <span class="sidebar__link-name">About</span>
+               <span class="sidebar__link-floating">About</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-discord-line"></i>
+               <span class="sidebar__link-name">Discord</span>
+               <span class="sidebar__link-floating">discord</span>
+            </a>
+         </div>
+
+         <!-- <h3 class="sidebar__title">
+            <span>Library</span>
+         </h3>
+
+         <div class="sidebar__list">
+            <a href="#" class="sidebar__link">
+               <i class="ri-history-line"></i>
+               <span class="sidebar__link-name">History</span>
+               <span class="sidebar__link-floating">History</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-time-line"></i>
+               <span class="sidebar__link-name">Watch Later</span>
+               <span class="sidebar__link-floating">Watch Later</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-play-circle-line"></i>
+               <span class="sidebar__link-name">Playlists</span>
+               <span class="sidebar__link-floating">Playlists</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-heart-3-line"></i>
+               <span class="sidebar__link-name">Liked Videos</span>
+               <span class="sidebar__link-floating">Liked Videos</span>
+            </a>
+         </div>
+
+         <h3 class="sidebar__title">
+            <span>General</span>
+         </h3>
+
+         <div class="sidebar__list">
+            <a href="#" class="sidebar__link">
+               <i class="ri-notification-2-line"></i>
+               <span class="sidebar__link-name">Notifications</span>
+               <span class="sidebar__link-floating">Notifications</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-settings-3-line"></i>
+               <span class="sidebar__link-name">Settings</span>
+               <span class="sidebar__link-floating">Settings</span>
+            </a>
+
+            <a href="#" class="sidebar__link">
+               <i class="ri-logout-box-r-line"></i>
+               <span class="sidebar__link-name">Logout</span>
+               <span class="sidebar__link-floating">Logout</span>
+            </a>
+         </div> -->
+      </div>
+
+     <% if (user && user.photo) { %>
+       <div class="sidebar__account">
+          <img src="<%= user.photo %>" alt="Profile Picture" class="sidebar__perfil">
+
+          <div class="sidebar__names">
+             <h3 class="sidebar__name"><%= user.displayName %></h3>
+
+          </div>
+
+         <a href="/logout"><i class="ri-logout-circle-line"></i></a>
+       </div>
+        <% } else { %>
+          <div class="sidebar__account">
+
+
+
+             <a href="/auth/google" class="overload"><i class="ri-login-circle-line"></i> </a>
+            <a href="/auth/google">
+            <div class="sidebar__names">
+               <h3 class="sidebar__name">Login</h3>
+          
+            </div>
+            </a>
+           </div>
+        
+          <% } %>
+   </nav>
+</div>
