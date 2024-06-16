@@ -1,5 +1,6 @@
 {
   "name": "nodejs",
+  "description": "",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,7 +12,7 @@
   "dependencies": {
     "@types/node": "^18.0.6",
     "body-parser": "^1.20.2",
-    "canvas": "^2.9.3",
+    "canvas": "^2.11.2",
     "connect-mongo": "^5.1.0",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
@@ -24,5 +25,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   },
-  "description": ""
+  "engines": {
+    "node": "20.x"
+  }
 }
