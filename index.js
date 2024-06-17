@@ -78,7 +78,7 @@ passport.use(
       clientID: process.env["Client_ID"],
       clientSecret: process.env["Client_secret"],
       callbackURL:
-        "https://8a4e911d-bee6-4b3e-82cc-2e8a00b7a4d5-00-1sj8f5ibpqt6r.janeway.replit.dev/auth/google/callback",
+        "https://www.blingo.tech/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile);
