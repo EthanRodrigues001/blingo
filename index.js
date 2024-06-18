@@ -183,7 +183,7 @@ app.get("/about", (req, res) => {
 
 // terms
 app.get("/terms", (req, res) => {
-  res.render("tersm", { user: req.user });
+  res.render("terms", { user: req.user });
 });
 
 // privacy
