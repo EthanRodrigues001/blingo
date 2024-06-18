@@ -181,6 +181,16 @@ app.get("/about", (req, res) => {
   res.render("about", { user: req.user });
 });
 
+// terms
+app.get("/terms", (req, res) => {
+  res.render("tersm", { user: req.user });
+});
+
+// privacy
+app.get("/privacy", (req, res) => {
+  res.render("privacy", { user: req.user });
+});
+
 // login
 
 // app.get("/login", (req, res) => {
