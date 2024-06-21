@@ -11,7 +11,7 @@ const createPetpetGif = require("./utils/petpet");
 const createWantedImage = require("./utils/wantedGenerator");
 const data = require("./jsondata/countries.json");
 const data2 = require("./jsondata/country-coords.json");
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
 // const petpetController = require('./utils/petpet_controller');
 
 //passport
@@ -55,12 +55,12 @@ app.use(
     secret: "blingo",
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env['db'] }),
+    store: MongoStore.create({ mongoUrl: process.env["db"] }),
     cookie: {
       maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
       secure: true, // set to true if using https
-    }
-  })
+    },
+  }),
 );
 
 // Error handling middleware
@@ -82,13 +82,13 @@ passport.use(
     {
       clientID: process.env["Client_ID"],
       clientSecret: process.env["Client_secret"],
-      callbackURL:
-        "https://www.blingo.tech/auth/google/callback",
+      callbackURL: "https://www.blingo.tech/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile);
 
       try {
+        ``;
         let user = await User.findOne({ googleId: profile.id });
 
         if (user) {
@@ -141,16 +141,16 @@ passport.deserializeUser(async (id, done) => {
 require("./api")(app);
 
 app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
 app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect('/dashboard');
-  }
+    res.redirect("/dashboard");
+  },
 );
 
 // Dashboard route
@@ -248,7 +248,6 @@ app.get("/utility/petpet", async (req, res) => {
   try {
     const { image, resolution, delay, backgroundColor } = req.query;
 
-
     if (!image && !resolution && !delay && !backgroundColor) {
       return res.render("petpet_form", {
         user: req.user,
@@ -257,7 +256,6 @@ app.get("/utility/petpet", async (req, res) => {
       });
     }
 
-    
     if (!image || (!image.endsWith(".png") && !image.endsWith(".jpg"))) {
       throw new Error(
         "Valid image URL required. It must end with .png or .jpg",
@@ -295,7 +293,6 @@ app.get("/utility/wanted", async (req, res) => {
   try {
     const { image } = req.query;
 
- 
     if (!image) {
       return res.render("wanted_form", {
         user: req.user,
@@ -304,7 +301,6 @@ app.get("/utility/wanted", async (req, res) => {
       });
     }
 
-    
     if (!image || (!image.endsWith(".png") && !image.endsWith(".jpg"))) {
       throw new Error(
         "Valid image URL required. It must end with .png or .jpg",
@@ -334,7 +330,6 @@ app.get("/utility/country", async (req, res) => {
   try {
     const { country } = req.query;
 
-
     if (!country) {
       return res.render("country_form", {
         user: req.user,
@@ -344,37 +339,38 @@ app.get("/utility/country", async (req, res) => {
     }
 
     const countryLower = country.toLowerCase();
-    const check1 = data.find(c => c.country.toLowerCase() === countryLower);
-    const check2 = data2.find(c => c.country.toLowerCase() === countryLower);
+    const check1 = data.find((c) => c.country.toLowerCase() === countryLower);
+    const check2 = data2.find((c) => c.country.toLowerCase() === countryLower);
 
     const continents = {
-      'as': '🌏 Asia',
-      'eu': '🌍 Europe',
-      'af': '🌍 Africa',
-      'na': '🌎 North America',
-      'sa': '🌎 South America',
-      'oc': '🌏 Oceania',
-      'an': '🌎 Antarctica',
+      as: "🌏 Asia",
+      eu: "🌍 Europe",
+      af: "🌍 Africa",
+      na: "🌎 North America",
+      sa: "🌎 South America",
+      oc: "🌏 Oceania",
+      an: "🌎 Antarctica",
     };
 
     if (check1) {
-      res.render('country_form', {
+      res.render("country_form", {
         user: req.user,
         countryData: check1,
         continents: continents,
         errorMessage: null,
       });
     } else if (check2) {
-      res.render('country_form', {
+      res.render("country_form", {
         user: req.user,
-        countryData: data.find(c => c.country.toLowerCase() === check2.name.toLowerCase()),
+        countryData: data.find(
+          (c) => c.country.toLowerCase() === check2.name.toLowerCase(),
+        ),
         continents: continents,
         errorMessage: null,
       });
     } else {
-      throw new Error('Country not found.');
+      throw new Error("Country not found.");
     }
-
   } catch (error) {
     console.error(error);
     res.render("country_form", {
@@ -385,13 +381,10 @@ app.get("/utility/country", async (req, res) => {
   }
 });
 
-
-
 // Start server
 app.listen(port, () => {
   console.log(getTimeStamp(), `Server is running on port ${port}`);
 });
-
 
 //functions
 
@@ -399,14 +392,12 @@ function getTimeStamp() {
   return new Date().toISOString();
 }
 
-
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/auth/google');
+  res.redirect("/auth/google");
 }
-
 
 //developers
 
@@ -414,5 +405,5 @@ function ensureAuthenticated(req, res, next) {
 //   res.render("developers", { user: req.user });
 // });
 
-//token reset job 
+//token reset job
 require("./cronJob");
