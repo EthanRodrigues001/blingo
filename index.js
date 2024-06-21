@@ -11,6 +11,7 @@ const createPetpetGif = require("./utils/petpet");
 const createWantedImage = require("./utils/wantedGenerator");
 const data = require("./jsondata/countries.json");
 const data2 = require("./jsondata/country-coords.json");
+const MongoStore = require('connect-mongo');
 // const petpetController = require('./utils/petpet_controller');
 
 //passport
@@ -49,13 +50,17 @@ mongoose
     console.error("MongoDB connection error:", error);
   });
 
-// Configure session
 app.use(
   session({
     secret: "blingo",
     resave: true,
     saveUninitialized: true,
-  }),
+    store: MongoStore.create({ mongoUrl: process.env['db'] }),
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+      secure: true, // set to true if using https
+    }
+  })
 );
 
 // Error handling middleware
@@ -135,19 +140,17 @@ passport.deserializeUser(async (id, done) => {
 //api
 require("./api")(app);
 
-// Auth with Google
 app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] }),
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-// Google auth callback
 app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect("/dashboard");
-  },
+    res.redirect('/dashboard');
+  }
 );
 
 // Dashboard route
@@ -401,8 +404,9 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/auth/google");
+  res.redirect('/auth/google');
 }
+
 
 //developers
 
